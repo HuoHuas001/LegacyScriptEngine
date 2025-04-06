@@ -365,6 +365,7 @@ Local<Value> WSClientClass::connectAsync(const Arguments& args) {
                     valid,
                     isDestroying
                 );
+                
                 if ((ll::getGamingStatus() != ll::GamingStatus::Running) || !EngineManager::isValid(engine)
                     || engine->isDestroying())
                     return;
