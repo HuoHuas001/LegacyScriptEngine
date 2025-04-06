@@ -355,6 +355,16 @@ Local<Value> WSClientClass::connectAsync(const Arguments& args) {
                 } catch (const std::runtime_error&) {
                     result = false;
                 }
+                bool isRunning = (ll::getGamingStatus() != ll::GamingStatus::Running);
+                bool valid = !EngineManager::isValid(engine);
+                bool isDestroying = engine->isDestroying();
+
+                lse::LegacyScriptEngine::getInstance().getSelf().getLogger().info(
+                    "isRunning:{} Valid:{} isDestorying:{}",
+                    isRunning,
+                    valid,
+                    isDestroying
+                );
                 if ((ll::getGamingStatus() != ll::GamingStatus::Running) || !EngineManager::isValid(engine)
                     || engine->isDestroying())
                     return;
